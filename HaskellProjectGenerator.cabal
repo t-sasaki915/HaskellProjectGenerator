@@ -33,7 +33,7 @@ library
   default-language: Haskell2010
   default-extensions: OverloadedStrings, LambdaCase, QuasiQuotes
 
-executable HaskellProjectGenerator-exe
+executable HaskellProjectGenerator
   main-is: Main.hs
   other-modules:
       Paths_HaskellProjectGenerator

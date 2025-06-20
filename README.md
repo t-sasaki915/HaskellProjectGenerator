@@ -1,2 +1,2 @@
 # HaskellProjectGenerator
-Haskell project generator
+Interactive Haskell project generator
