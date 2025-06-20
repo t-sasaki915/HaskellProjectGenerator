@@ -1,0 +1,49 @@
+cabal-version: 2.2
+
+name:           HaskellProjectGenerator
+version:        1.0.0.0
+description:    Please see the README on GitHub at <https://github.com/t-sasaki915/HaskellProjectGenerator#readme>
+homepage:       https://github.com/t-sasaki915/HaskellProjectGenerator#readme
+bug-reports:    https://github.com/t-sasaki915/HaskellProjectGenerator/issues
+author:         Toma Sasaki
+maintainer:     netst915@gmail.com
+copyright:      2025 Toma Sasaki
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/t-sasaki915/HaskellProjectGenerator
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_HaskellProjectGenerator
+  autogen-modules:
+      Paths_HaskellProjectGenerator
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+  default-extensions: OverloadedStrings, LambdaCase, QuasiQuotes
+
+executable HaskellProjectGenerator-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_HaskellProjectGenerator
+  autogen-modules:
+      Paths_HaskellProjectGenerator
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      HaskellProjectGenerator
+    , base >=4.7 && <5
+  default-language: Haskell2010
+  default-extensions: OverloadedStrings, LambdaCase, QuasiQuotes
