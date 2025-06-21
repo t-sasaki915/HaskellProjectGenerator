@@ -12,7 +12,7 @@ import           System.Console.Haskeline (InputT, defaultSettings,
 import           Text.Regex.Posix         ((=~))
 
 data Inputs = Inputs
-    { gitHubUrlToClone   :: Text
+    { gitHubUrl          :: Text
     , projectName        :: Text
     , projectVersion     :: Text
     , projectHomepage    :: Text
@@ -32,7 +32,7 @@ data Inputs = Inputs
 askInputs :: IO Inputs
 askInputs = runInputT defaultSettings $
     Inputs
-        <$> askInput   "GitHub URL to clone?" Nothing
+        <$> askInput   "GitHub URL?"          Nothing
         <*> askInput   "Project name?"        Nothing
         <*> askInput   "Project version?"     (Just "1.0.0.0")
         <*> askInput   "Project homepage"     (Just "${gitHubUrl}#readme")
@@ -80,4 +80,3 @@ ask prompt f title maybeDefaultValue = do
             case f (Text.pack value) of
                 Just value' -> return value'
                 Nothing     -> ask prompt f title maybeDefaultValue
-
