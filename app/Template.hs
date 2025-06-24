@@ -2,6 +2,7 @@ module Template (templates) where
 
 import           Data.ByteString    (ByteString)
 import           Data.Text          (Text)
+import qualified Data.Text          as Text
 import           Data.Text.Encoding (encodeUtf8)
 import           Text.Heredoc       (heredoc)
 
@@ -13,6 +14,7 @@ templates :: Inputs -> [(Text, ByteString)]
 templates inputs =
     [ (projDir </> projectName inputs <> ".cabal", projectCabal inputs)
     , (projDir </> "stack.yaml"                  , stackYaml inputs)
+    , (projDir </> "README.md"                   , readme inputs)
     ]
     <> staticTemplates inputs
 
@@ -38,16 +40,32 @@ extra-source-files:
     README.md
 
 source-repository head
-    type: git
-    location: ${projectRepository inputs}
+  type: git
+  location: ${projectRepository inputs}
+
+$if needLibrary inputs
+    library
+      exposed-modules:
+          Lib
+      other-modules:
+          Paths_${Text.replace "-" "_" (projectName inputs)}
+      autogen-modules:
+          Paths_${Text.replace "-" "_" (projectName inputs)}
+      hs-source-dirs:
+          src
+      ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+      build-depends:
+          base >=4.7 && <5
+      default-language: Haskell2010
+      default-extensions: LambdaCase, OverloadedStrings, QuasiQuotes
 
 $if needExecutable inputs
     executable ${projectName inputs}-exe
       main-is: Main.hs
       other-modules:
-          Paths_${projectName inputs}
+          Paths_${Text.replace "-" "_" (projectName inputs)}
       autogen-modules:
-          Paths_${projectName inputs}
+          Paths_${Text.replace "-" "_" (projectName inputs)}
       hs-source-dirs:
           app
       ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
@@ -60,30 +78,14 @@ $if needExecutable inputs
       default-language: Haskell2010
       default-extensions: OverloadedStrings, LambdaCase, QuasiQuotes
 
-$if needLibrary inputs
-    library
-      exposed-modules:
-          Lib
-      other-modules:
-          Paths_${projectName inputs}
-      autogen-modules:
-          Paths_${projectName inputs}
-      hs-source-dirs:
-          src
-      ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
-      build-depends:
-          base >=4.7 && <5
-      default-language: Haskell2010
-      default-extensions: LambdaCase, OverloadedStrings, QuasiQuotes
-
 $if needTestSuite inputs
     test-suite ${projectName inputs}-test
       type: exitcode-stdio-1.0
       main-is: Spec.hs
       other-modules:
-          Paths_${projectName inputs}
+          Paths_${Text.replace "-" "_" (projectName inputs)}
       autogen-modules:
-          Paths_${projectName inputs}
+          Paths_${Text.replace "-" "_" (projectName inputs)}
       hs-source-dirs:
           test
       ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
@@ -104,4 +106,10 @@ compiler: ${compilerVersion inputs}
 
 packages:
 - .
+    |]
+
+readme :: Inputs -> ByteString
+readme inputs = encodeUtf8
+    [heredoc|# ${projectName inputs}
+${projectDescription inputs}
     |]
