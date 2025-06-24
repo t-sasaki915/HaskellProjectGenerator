@@ -1,13 +1,15 @@
 module Template (templates) where
 
-import           Data.Text         (Text)
-import           Text.Heredoc      (heredoc)
+import           Data.ByteString    (ByteString)
+import           Data.Text          (Text)
+import           Data.Text.Encoding (encodeUtf8)
+import           Text.Heredoc       (heredoc)
 
-import           Input             (Inputs (..))
-import           Template.Internal ((</>))
-import           Template.Static   (staticTemplates)
+import           Input              (Inputs (..))
+import           Template.Internal  ((</>))
+import           Template.Static    (staticTemplates)
 
-templates :: Inputs -> [(Text, Text)]
+templates :: Inputs -> [(Text, ByteString)]
 templates inputs =
     [ (projDir </> projectName inputs <> ".cabal", projectCabal inputs)
     , (projDir </> "stack.yaml"                  , stackYaml inputs)
@@ -17,8 +19,8 @@ templates inputs =
     where
         projDir = projectDirectory inputs
 
-projectCabal :: Inputs -> Text
-projectCabal inputs =
+projectCabal :: Inputs -> ByteString
+projectCabal inputs = encodeUtf8
     [heredoc|cabal-version: 2.2
 
 name:           ${projectName inputs}
@@ -95,8 +97,8 @@ $if needTestSuite inputs
       default-extensions: LambdaCase, OverloadedStrings, QuasiQuotes
     |]
 
-stackYaml :: Inputs -> Text
-stackYaml inputs =
+stackYaml :: Inputs -> ByteString
+stackYaml inputs = encodeUtf8
     [heredoc|resolver: ${stackResolver inputs}
 compiler: ${compilerVersion inputs}
 

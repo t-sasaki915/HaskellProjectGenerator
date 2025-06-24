@@ -2,14 +2,14 @@
 
 module Template.Static (staticTemplates) where
 
-import           Data.FileEmbed     (embedFile)
-import           Data.Text          (Text)
-import           Data.Text.Encoding (decodeUtf8)
+import           Data.ByteString   (ByteString)
+import           Data.FileEmbed    (embedFile)
+import           Data.Text         (Text)
 
-import           Input              (Inputs (..))
-import           Template.Internal  ((</>))
+import           Input             (Inputs (..))
+import           Template.Internal ((</>))
 
-staticTemplates :: Inputs -> [(Text, Text)]
+staticTemplates :: Inputs -> [(Text, ByteString)]
 staticTemplates inputs =
     [ (projDir </> ".gitignore"           , gitignore)
     , (projDir </> ".hlint.yaml"          , hlintYaml)
@@ -19,27 +19,27 @@ staticTemplates inputs =
     <> [ (projDir </> "app"  </> "Main.hs", mainHs) | needExecutable inputs ]
     <> [ (projDir </> "src"  </> "Lib.hs" , libHs)  | needLibrary inputs ]
     <> [ (projDir </> "test" </> "Spec.hs", specHs) | needTestSuite inputs]
-    
+
     where
         projDir = projectDirectory inputs
 
-gitignore :: Text
-gitignore = decodeUtf8 $(embedFile "static/.gitignore")
+gitignore :: ByteString
+gitignore = $(embedFile "static/.gitignore")
 
-hlintYaml :: Text
-hlintYaml = decodeUtf8 $(embedFile "static/.hlint.yaml")
+hlintYaml :: ByteString
+hlintYaml = $(embedFile "static/.hlint.yaml")
 
-stylishHaskellYaml :: Text
-stylishHaskellYaml = decodeUtf8 $(embedFile "static/.stylish-haskell.yaml")
+stylishHaskellYaml :: ByteString
+stylishHaskellYaml = $(embedFile "static/.stylish-haskell.yaml")
 
-libHs :: Text
-libHs = decodeUtf8 $(embedFile "static/Lib.hs")
+libHs :: ByteString
+libHs = $(embedFile "static/Lib.hs")
 
-mainHs :: Text
-mainHs = decodeUtf8 $(embedFile "static/Main.hs")
+mainHs :: ByteString
+mainHs = $(embedFile "static/Main.hs")
 
-setupHs :: Text
-setupHs = decodeUtf8 $(embedFile "static/Setup.hs")
+setupHs :: ByteString
+setupHs = $(embedFile "static/Setup.hs")
 
-specHs :: Text
-specHs = decodeUtf8 $(embedFile "static/Spec.hs")
+specHs :: ByteString
+specHs = $(embedFile "static/Spec.hs")

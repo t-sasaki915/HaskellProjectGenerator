@@ -1,6 +1,7 @@
 module Main (main) where
 
 import           Control.Monad    (forM_)
+import qualified Data.ByteString  as BS
 import qualified Data.Text        as Text
 import qualified Data.Text.IO     as TextIO
 import           System.Directory (createDirectoryIfMissing, doesFileExist)
@@ -27,7 +28,7 @@ main = do
             False -> do
                 createDirectoryIfMissing True (takeDirectory filePath)
 
-                TextIO.writeFile filePath content
+                BS.writeFile filePath content
 
                 TextIO.putStrLn "OK."
 

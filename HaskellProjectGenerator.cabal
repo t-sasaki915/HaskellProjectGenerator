@@ -47,5 +47,6 @@ executable HaskellProjectGenerator
     , filepath ==1.5.4.0
     , file-embed ==0.0.16.0
     , directory ==1.3.9.0
+    , bytestring ==0.12.2.0
   default-language: Haskell2010
   default-extensions: OverloadedStrings, LambdaCase, QuasiQuotes
