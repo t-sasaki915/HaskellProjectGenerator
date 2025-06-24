@@ -5,19 +5,21 @@ import qualified Data.Text        as Text
 import qualified Data.Text.IO     as TextIO
 import           System.Directory (createDirectoryIfMissing, doesFileExist)
 import           System.FilePath  (takeDirectory)
+import           System.IO        (hFlush, stdout)
 
-import           Input            (askInputs)
+import           Input            (Inputs (projectName), askInputs)
 import           Template         (templates)
 
 main :: IO ()
 main = do
-    putStrLn "Haskell Project Generator"
-    putStrLn ""
+    TextIO.putStrLn "Haskell Project Generator"
+    TextIO.putStrLn ""
 
     inputs <- askInputs
 
     forM_ (templates inputs) $ \(filePath', content) -> do
-        TextIO.putStrLn ("Creating " <> filePath' <> " ...")
+        TextIO.putStr ("Creating " <> filePath' <> " ...")
+        hFlush stdout
 
         let filePath = Text.unpack filePath'
 
@@ -27,8 +29,10 @@ main = do
 
                 TextIO.writeFile filePath content
 
-                TextIO.putStrLn ("Created " <> filePath' <> " .")
+                TextIO.putStrLn "OK."
 
             True ->
-                TextIO.putStrLn ("Skipped " <> filePath' <> " because the file is existing.")
+                TextIO.putStrLn ("Skipped because the file is existing.")
 
+    TextIO.putStrLn ""
+    TextIO.putStrLn ("Project " <> projectName inputs <> " has been created.")
