@@ -15,6 +15,17 @@ packages:
   original:
     commit: ca6813f9cf2f94e4107147019c8a067f17113c86
     git: https://github.com/t-sasaki915/ConsoleAsk
+- completed:
+    commit: 4cbb2fbe7e2e8821b38fde94f7cdcde0620c0f17
+    git: https://github.com/t-sasaki915/heredoc
+    name: heredocs
+    pantry-tree:
+      sha256: d66eccbbb286d21eece90aa4c5f1af048a7f613ca707dc7ab1ac08ecb0e08918
+      size: 471
+    version: 0.2.1.1
+  original:
+    commit: 4cbb2fbe7e2e8821b38fde94f7cdcde0620c0f17
+    git: https://github.com/t-sasaki915/heredoc
 snapshots:
 - completed:
     sha256: e9b93acfb8aaf8ae4869050506553a963a8adba95748cd60356f9ffe64f03345

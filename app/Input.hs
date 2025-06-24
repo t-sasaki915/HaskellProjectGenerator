@@ -9,7 +9,7 @@ import           System.Console.Ask     (ask, askOrElse, defaultBehaviour,
                                          runAsk)
 
 data Inputs = Inputs
-    { gitHubUrl          :: Text
+    { projectRepository  :: Text
     , projectName        :: Text
     , projectVersion     :: Text
     , projectHomepage    :: Text
@@ -31,11 +31,11 @@ askInputs = runAsk defaultBehaviour $ do
     now <- liftIO getCurrentTime
     let (year, _, _) = toGregorian $ utctDay now
 
-    gitHubUrl'          <- ask       "GitHub URL?"          "> "
+    projectRepository'  <- ask       "Project repository?"  "> "
     projectName'        <- ask       "Project name?"        "> "
     projectVersion'     <- askOrElse "Project version?"     "> " "1.0.0.0"
-    projectHomepage'    <- askOrElse "Project homepage?"    "> " (gitHubUrl' <> "#readme")
-    projectBugReports'  <- askOrElse "Project bug-reports?" "> " (gitHubUrl' <> "/issues")
+    projectHomepage'    <- askOrElse "Project homepage?"    "> " (projectRepository' <> "#readme")
+    projectBugReports'  <- askOrElse "Project bug-reports?" "> " (projectRepository' <> "/issues")
     projectDescription' <- askOrElse "Project description?" "> " ("Please see the README on GitHub at <" <> projectHomepage' <> ">")
     projectAuthor'      <- askOrElse "Project author?"      "> " "Toma Sasaki"
     projectMaintainer'  <- askOrElse "Project maintainer?"  "> " "netst915@gmail.com"
@@ -48,7 +48,7 @@ askInputs = runAsk defaultBehaviour $ do
     needTestSuite'      <- askOrElse "Need test suite?"     "> " True
 
     return Inputs
-        { gitHubUrl          = gitHubUrl'
+        { projectRepository  = projectRepository'
         , projectName        = projectName'
         , projectVersion     = projectVersion'
         , projectHomepage    = projectHomepage'

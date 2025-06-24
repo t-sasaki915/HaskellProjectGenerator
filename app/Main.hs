@@ -1,6 +1,8 @@
 module Main (main) where
 
+import qualified Data.Text.IO as TextIO
 import           Input
+import           Template
 
 main :: IO ()
 main = do
@@ -9,4 +11,5 @@ main = do
 
     inputs <- askInputs
 
-    print inputs
+    TextIO.putStrLn (projectCabal inputs)
+    TextIO.putStrLn (stackYaml inputs)
