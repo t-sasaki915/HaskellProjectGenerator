@@ -1,22 +1,25 @@
 module Template (templates) where
 
-import           Data.Text       (Text, unpack)
-import           Text.Heredoc    (heredoc)
+import           Data.Text         (Text)
+import           Text.Heredoc      (heredoc)
 
-import           Input           (Inputs (..))
-import           Template.Static (staticTemplates)
+import           Input             (Inputs (..))
+import           Template.Internal ((</>))
+import           Template.Static   (staticTemplates)
 
-templates :: Inputs -> [(FilePath, Text)]
+templates :: Inputs -> [(Text, Text)]
 templates inputs =
-    [ (unpack (projectName inputs) <> ".cabal", projectCabal inputs)
-    , ("stack.yaml"                           , stackYaml inputs)
+    [ (projDir </> projectName inputs <> ".cabal", projectCabal inputs)
+    , (projDir </> "stack.yaml"                  , stackYaml inputs)
     ]
     <> staticTemplates inputs
 
+    where
+        projDir = projectDirectory inputs
+
 projectCabal :: Inputs -> Text
 projectCabal inputs =
-    [heredoc|
-cabal-version: 2.2
+    [heredoc|cabal-version: 2.2
 
 name:           ${projectName inputs}
 version:        ${projectVersion inputs}
@@ -94,8 +97,7 @@ $if needTestSuite inputs
 
 stackYaml :: Inputs -> Text
 stackYaml inputs =
-    [heredoc|
-resolver: ${stackResolver inputs}
+    [heredoc|resolver: ${stackResolver inputs}
 compiler: ${compilerVersion inputs}
 
 packages:

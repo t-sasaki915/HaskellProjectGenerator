@@ -29,6 +29,7 @@ executable HaskellProjectGenerator
   main-is: Main.hs
   other-modules:
       Paths_HaskellProjectGenerator
+      Template.Internal
       Template.Static
       Input
       Template
@@ -45,5 +46,6 @@ executable HaskellProjectGenerator
     , heredocs ==0.2.1.1
     , filepath ==1.5.4.0
     , file-embed ==0.0.16.0
+    , directory ==1.3.9.0
   default-language: Haskell2010
   default-extensions: OverloadedStrings, LambdaCase, QuasiQuotes

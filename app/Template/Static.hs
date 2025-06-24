@@ -5,20 +5,23 @@ module Template.Static (staticTemplates) where
 import           Data.FileEmbed     (embedFile)
 import           Data.Text          (Text)
 import           Data.Text.Encoding (decodeUtf8)
-import           System.FilePath    ((</>))
 
 import           Input              (Inputs (..))
+import           Template.Internal  ((</>))
 
-staticTemplates :: Inputs -> [(FilePath, Text)]
+staticTemplates :: Inputs -> [(Text, Text)]
 staticTemplates inputs =
-    [ (".gitignore"           , gitignore)
-    , (".hlint.yaml"          , hlintYaml)
-    , (".stylish-haskell.yaml", stylishHaskellYaml)
-    , ("Setup.hs"             , setupHs)
+    [ (projDir </> ".gitignore"           , gitignore)
+    , (projDir </> ".hlint.yaml"          , hlintYaml)
+    , (projDir </> ".stylish-haskell.yaml", stylishHaskellYaml)
+    , (projDir </> "Setup.hs"             , setupHs)
     ]
-    <> [ ("app"  </> "Main.hs", mainHs) | needExecutable inputs ]
-    <> [ ("src"  </> "Lib.hs" , libHs)  | needLibrary inputs ]
-    <> [ ("test" </> "Spec.hs", specHs) | needTestSuite inputs]
+    <> [ (projDir </> "app"  </> "Main.hs", mainHs) | needExecutable inputs ]
+    <> [ (projDir </> "src"  </> "Lib.hs" , libHs)  | needLibrary inputs ]
+    <> [ (projDir </> "test" </> "Spec.hs", specHs) | needTestSuite inputs]
+    
+    where
+        projDir = projectDirectory inputs
 
 gitignore :: Text
 gitignore = decodeUtf8 $(embedFile "static/.gitignore")

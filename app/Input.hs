@@ -9,8 +9,9 @@ import           System.Console.Ask     (ask, askOrElse, defaultBehaviour,
                                          runAsk)
 
 data Inputs = Inputs
-    { projectRepository  :: Text
-    , projectName        :: Text
+    { projectName        :: Text
+    , projectDirectory   :: Text
+    , projectRepository  :: Text
     , projectVersion     :: Text
     , projectHomepage    :: Text
     , projectBugReports  :: Text
@@ -31,8 +32,9 @@ askInputs = runAsk defaultBehaviour $ do
     now <- liftIO getCurrentTime
     let (year, _, _) = toGregorian $ utctDay now
 
-    projectRepository'  <- ask       "Project repository?"  "> "
     projectName'        <- ask       "Project name?"        "> "
+    projectDirectory'   <- askOrElse "Project directory?"   "> " projectName'
+    projectRepository'  <- askOrElse "Project repository?"  "> " ("https://github.com/t-sasaki915/" <> projectName')
     projectVersion'     <- askOrElse "Project version?"     "> " "1.0.0.0"
     projectHomepage'    <- askOrElse "Project homepage?"    "> " (projectRepository' <> "#readme")
     projectBugReports'  <- askOrElse "Project bug-reports?" "> " (projectRepository' <> "/issues")
@@ -48,8 +50,9 @@ askInputs = runAsk defaultBehaviour $ do
     needTestSuite'      <- askOrElse "Need test suite?"     "> " True
 
     return Inputs
-        { projectRepository  = projectRepository'
-        , projectName        = projectName'
+        { projectName        = projectName'
+        , projectDirectory   = projectDirectory'
+        , projectRepository  = projectRepository'
         , projectVersion     = projectVersion'
         , projectHomepage    = projectHomepage'
         , projectBugReports  = projectBugReports'
