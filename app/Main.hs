@@ -1,11 +1,12 @@
 module Main (main) where
 
-import           Input (askInputs)
+import           Input
 
 main :: IO ()
 main = do
     putStrLn "Haskell Project Generator"
+    putStrLn ""
 
     inputs <- askInputs
 
-    putStrLn (show inputs)
+    print inputs

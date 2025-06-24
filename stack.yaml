@@ -3,3 +3,7 @@ compiler: ghc-9.12.2
 
 packages:
 - .
+
+extra-deps:
+  - git: https://github.com/t-sasaki915/ConsoleAsk
+    commit: ca6813f9cf2f94e4107147019c8a067f17113c86

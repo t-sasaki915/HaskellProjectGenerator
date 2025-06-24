@@ -3,7 +3,18 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/topics/lock_files
 
-packages: []
+packages:
+- completed:
+    commit: ca6813f9cf2f94e4107147019c8a067f17113c86
+    git: https://github.com/t-sasaki915/ConsoleAsk
+    name: ConsoleAsk
+    pantry-tree:
+      sha256: 67cbb537d971211dd4c1ad8bdee91d43f3d9675d1ea7b5c2b095ab3dcc5fd597
+      size: 762
+    version: 1.0.0.0
+  original:
+    commit: ca6813f9cf2f94e4107147019c8a067f17113c86
+    git: https://github.com/t-sasaki915/ConsoleAsk
 snapshots:
 - completed:
     sha256: e9b93acfb8aaf8ae4869050506553a963a8adba95748cd60356f9ffe64f03345
