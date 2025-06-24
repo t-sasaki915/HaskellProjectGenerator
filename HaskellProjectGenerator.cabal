@@ -13,6 +13,13 @@ license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
+    static/.gitignore
+    static/.hlint.yaml
+    static/.stylish-haskell.yaml
+    static/Lib.hs
+    static/Main.hs
+    static/Setup.hs
+    static/Spec.hs
 
 source-repository head
   type: git
@@ -22,6 +29,7 @@ executable HaskellProjectGenerator
   main-is: Main.hs
   other-modules:
       Paths_HaskellProjectGenerator
+      Template.Static
       Input
       Template
   autogen-modules:
@@ -35,5 +43,7 @@ executable HaskellProjectGenerator
     , ConsoleAsk ==1.0.0.0
     , time ==1.14
     , heredocs ==0.2.1.1
+    , filepath ==1.5.4.0
+    , file-embed ==0.0.16.0
   default-language: Haskell2010
   default-extensions: OverloadedStrings, LambdaCase, QuasiQuotes

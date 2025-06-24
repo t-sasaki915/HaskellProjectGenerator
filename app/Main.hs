@@ -11,5 +11,4 @@ main = do
 
     inputs <- askInputs
 
-    TextIO.putStrLn (projectCabal inputs)
-    TextIO.putStrLn (stackYaml inputs)
+    TextIO.putStrLn ""

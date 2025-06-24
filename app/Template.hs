@@ -1,16 +1,17 @@
-module Template
-    ( projectCabal
-    , stackYaml
-    , setupHs
-    , mainHs
-    , libHs
-    , specHs
-    ) where
+module Template (templates) where
 
-import           Data.Text    (Text)
-import           Text.Heredoc (heredoc)
+import           Data.Text       (Text, unpack)
+import           Text.Heredoc    (heredoc)
 
-import           Input        (Inputs (..))
+import           Input           (Inputs (..))
+import           Template.Static (staticTemplates)
+
+templates :: Inputs -> [(FilePath, Text)]
+templates inputs =
+    [ (unpack (projectName inputs) <> ".cabal", projectCabal inputs)
+    , ("stack.yaml"                           , stackYaml inputs)
+    ]
+    <> staticTemplates inputs
 
 projectCabal :: Inputs -> Text
 projectCabal inputs =
@@ -99,33 +100,4 @@ compiler: ${compilerVersion inputs}
 
 packages:
 - .
-    |]
-
-setupHs :: Inputs -> Text
-setupHs _ =
-    [heredoc|
-import Distribution.Simple
-main = defaultMain
-    |]
-
-mainHs :: Inputs -> Text
-mainHs _ =
-    [heredoc|
-module Main (main) where
-
-main :: IO ()
-main = putStrLn "TEST"
-    |]
-
-libHs :: Inputs -> Text
-libHs _ =
-    [heredoc|
-module Lib () where
-    |]
-
-specHs :: Inputs -> Text
-specHs _ =
-    [heredoc|
-main :: IO ()
-main = putStrLn "No test"
     |]
