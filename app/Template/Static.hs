@@ -14,7 +14,6 @@ staticTemplates inputs =
     [ (projDir </> ".gitignore"           , gitignore)
     , (projDir </> ".hlint.yaml"          , hlintYaml)
     , (projDir </> ".stylish-haskell.yaml", stylishHaskellYaml)
-    , (projDir </> "LICENSE"              , license)
     , (projDir </> "Setup.hs"             , setupHs)
     ]
     <> [ (projDir </> "app"  </> "Main.hs", mainHs) | needExecutable inputs ]
@@ -32,9 +31,6 @@ hlintYaml = $(embedFile "static/.hlint.yaml")
 
 stylishHaskellYaml :: ByteString
 stylishHaskellYaml = $(embedFile "static/.stylish-haskell.yaml")
-
-license :: ByteString
-license = $(embedFile "static/LICENSE")
 
 libHs :: ByteString
 libHs = $(embedFile "static/Lib.hs")

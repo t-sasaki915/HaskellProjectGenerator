@@ -25,12 +25,13 @@ data Inputs = Inputs
     , needExecutable     :: Bool
     , needLibrary        :: Bool
     , needTestSuite      :: Bool
+    , projectCreatedYear :: Integer
     } deriving Show
 
 askInputs :: IO Inputs
 askInputs = runAsk defaultBehaviour $ do
     now <- liftIO getCurrentTime
-    let (year, _, _) = toGregorian $ utctDay now
+    let (currentYear, _, _) = toGregorian $ utctDay now
 
     projectName'        <- ask       "Project name?"        "> "
     projectDirectory'   <- askOrElse "Project directory?"   "> " projectName'
@@ -42,7 +43,7 @@ askInputs = runAsk defaultBehaviour $ do
     projectAuthor'      <- askOrElse "Project author?"      "> " "Toma Sasaki"
     projectMaintainer'  <- askOrElse "Project maintainer?"  "> " "netst915@gmail.com"
     projectLicence'     <- askOrElse "Project licence?"     "> " "MIT"
-    projectCopyright'   <- askOrElse "Project copyright?"   "> " (Text.show year <> " " <> projectAuthor')
+    projectCopyright'   <- askOrElse "Project copyright?"   "> " (Text.show currentYear <> " " <> projectAuthor')
     stackResolver'      <- askOrElse "Stack resolver?"      "> " "nightly-2025-05-28"
     compilerVersion'    <- askOrElse "Compiler version?"    "> " "ghc-9.12.2"
     needExecutable'     <- askOrElse "Need executable?"     "> " True
@@ -66,4 +67,5 @@ askInputs = runAsk defaultBehaviour $ do
         , needExecutable     = needExecutable'
         , needLibrary        = needLibrary'
         , needTestSuite      = needTestSuite'
+        , projectCreatedYear = currentYear
         }
