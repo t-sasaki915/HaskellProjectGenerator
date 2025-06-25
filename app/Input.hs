@@ -50,7 +50,7 @@ askInputs = runAsk defaultBehaviour $ do
     needLibrary'        <- askOrElse "Need library?"        "> " True
     needTestSuite'      <- askOrElse "Need test suite?"     "> " True
 
-    return Inputs
+    pure Inputs
         { projectName        = projectName'
         , projectDirectory   = projectDirectory'
         , projectRepository  = projectRepository'
