@@ -3,7 +3,7 @@ packages: .
 source-repository-package
     type: git
     location: https://github.com/t-sasaki915/ConsoleAsk
-    tag: 91c07de37d5333aec68af5592b8ed7621f259f18
+    tag: cd779f5108e3dec5e8a82f0762095a7caaf66cfb
 
 source-repository-package
     type: git
