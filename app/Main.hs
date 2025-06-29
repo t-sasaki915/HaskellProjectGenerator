@@ -33,7 +33,7 @@ main = do
                 TextIO.putStrLn "OK."
 
             True ->
-                TextIO.putStrLn ("Skipped because the file is existing.")
+                TextIO.putStrLn "Skipped because the file is existing."
 
     TextIO.putStrLn ""
     TextIO.putStrLn ("Project " <> projectName inputs <> " has been created.")
