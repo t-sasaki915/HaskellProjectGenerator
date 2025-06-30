@@ -5,15 +5,15 @@
 
 packages:
 - completed:
-    commit: b518fb35c7f9f6858cd090ecda381ece9dc3566a
+    commit: 4da0d98bf98b8e530e28427df98ef5331912a279
     git: https://github.com/t-sasaki915/ConsoleAsk
     name: ConsoleAsk
     pantry-tree:
-      sha256: 1e5f7b34e09b8788cfef7d35d539a099ad338b5a77104756f87aa6c7c246084c
-      size: 762
+      sha256: f15a9406c4eef8efd2cc408b10fcf0dabb1e6f80ed25b58de638d48664f9d472
+      size: 763
     version: 1.0.0.0
   original:
-    commit: b518fb35c7f9f6858cd090ecda381ece9dc3566a
+    commit: 4da0d98bf98b8e530e28427df98ef5331912a279
     git: https://github.com/t-sasaki915/ConsoleAsk
 - completed:
     commit: 4cbb2fbe7e2e8821b38fde94f7cdcde0620c0f17
