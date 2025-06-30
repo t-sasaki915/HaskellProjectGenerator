@@ -41,7 +41,7 @@ executable HaskellProjectGenerator
   build-depends:
       base >=4.7 && <5
     , text ==2.1.2
-    , ConsoleAsk ==1.0.0.0
+    , ConsoleAsk ==0.1.0.0
     , time ==1.14
     , heredocs ==0.2.1.1
     , filepath ==1.5.4.0

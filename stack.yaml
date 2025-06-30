@@ -6,7 +6,7 @@ packages:
 
 extra-deps:
   - git: https://github.com/t-sasaki915/ConsoleAsk
-    commit: b0da512800d25d00ca23183cccb97ee4454726b4
+    commit: f38ac0ee786cac660904727ae5b727bb7bb78b4b
   
   - git: https://github.com/t-sasaki915/heredoc
     commit: 4cbb2fbe7e2e8821b38fde94f7cdcde0620c0f17

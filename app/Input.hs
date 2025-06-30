@@ -36,7 +36,7 @@ askInputs = runAsk defaultBehaviour $ do
     projectName'        <- ask       "Project name?"
     projectDirectory'   <- askOrElse "Project directory?"   projectName'
     projectRepository'  <- askOrElse "Project repository?"  ("https://github.com/t-sasaki915/" <> projectName')
-    projectVersion'     <- askOrElse "Project version?"     "1.0.0.0"
+    projectVersion'     <- askOrElse "Project version?"     "0.1.0.0"
     projectHomepage'    <- askOrElse "Project homepage?"    (projectRepository' <> "#readme")
     projectBugReports'  <- askOrElse "Project bug-reports?" (projectRepository' <> "/issues")
     projectDescription' <- askOrElse "Project description?" ("Please see the README on GitHub at <" <> projectHomepage' <> ">")
