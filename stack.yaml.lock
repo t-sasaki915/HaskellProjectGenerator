@@ -5,15 +5,15 @@
 
 packages:
 - completed:
-    commit: 4cbb2fbe7e2e8821b38fde94f7cdcde0620c0f17
+    commit: 9cd60269959a247b2aff42a0af33fcdda2570c46
     git: https://github.com/t-sasaki915/heredoc
     name: heredocs
     pantry-tree:
-      sha256: d66eccbbb286d21eece90aa4c5f1af048a7f613ca707dc7ab1ac08ecb0e08918
+      sha256: 63e50952f9b5c6e02cc52e8ce2a387b5f55cad095c71a01d157684a431c470a0
       size: 471
     version: 0.2.1.1
   original:
-    commit: 4cbb2fbe7e2e8821b38fde94f7cdcde0620c0f17
+    commit: 9cd60269959a247b2aff42a0af33fcdda2570c46
     git: https://github.com/t-sasaki915/heredoc
 - completed:
     hackage: ConsoleAsk-0.1.0.1@sha256:59f85fa207c0bc12fb56d0285e1e31550d40891c5c74e97b21bdf0ccfbd1887c,1415
