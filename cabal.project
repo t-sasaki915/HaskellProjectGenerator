@@ -2,10 +2,5 @@ packages: .
 
 source-repository-package
     type: git
-    location: https://github.com/t-sasaki915/ConsoleAsk
-    tag: f38ac0ee786cac660904727ae5b727bb7bb78b4b
-
-source-repository-package
-    type: git
     location: https://github.com/t-sasaki915/heredoc
     tag: 4cbb2fbe7e2e8821b38fde94f7cdcde0620c0f17
