@@ -6,4 +6,4 @@ packages:
 
 extra-deps:  
   - ConsoleAsk-0.1.0.1
-  - heredocs-r2-0.1.0.0
+  - heredocs-r2-0.1.0.1
