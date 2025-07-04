@@ -12,12 +12,12 @@ packages:
   original:
     hackage: ConsoleAsk-0.1.0.1
 - completed:
-    hackage: heredocs-r2-0.1.0.1@sha256:55b7590da700f74be5ab8f74339d9538111752738586a6fc856cbed5f3b1d19c,1804
+    hackage: heredocs-r2-0.1.0.2@sha256:ddec3be0947699b32c8530de288bb48f2ccf9308337dfe0b96070436fba8442c,1792
     pantry-tree:
-      sha256: 366d21634144370bade9c56738b5298944e47e1591fc2668d5047c8d01fb9f24
-      size: 432
+      sha256: 0d7c398c68edc35d2574f2176d4b47bf723c1dbf1ebe975df5353679aff9032b
+      size: 433
   original:
-    hackage: heredocs-r2-0.1.0.1
+    hackage: heredocs-r2-0.1.0.2
 snapshots:
 - completed:
     sha256: e9b93acfb8aaf8ae4869050506553a963a8adba95748cd60356f9ffe64f03345
