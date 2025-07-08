@@ -4,8 +4,6 @@ compiler: ghc-9.12.2
 packages:
 - .
 
-extra-deps:
-  - git: https://github.com/t-sasaki915/heredoc
-    commit: 9cd60269959a247b2aff42a0af33fcdda2570c46
-  
+extra-deps:  
   - ConsoleAsk-0.1.0.1
+  - heredocs-r2-0.1.0.2
