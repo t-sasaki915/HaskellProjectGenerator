@@ -17,6 +17,7 @@ templates inputs =
     , (projDir </> "README.md"                   , readme inputs)
     , (projDir </> "LICENSE"                     , license inputs)
     ]
+    <> [(projDir </> "CHANGELOG.md", changelog inputs) | needChangelog inputs]
     <> staticTemplates inputs
 
     where
@@ -39,6 +40,8 @@ license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
+    $if needChangelog inputs
+        CHANGELOG.md
 
 source-repository head
   type: git
@@ -98,7 +101,7 @@ $if needTestSuite inputs
             base >=4.7 && <5
       default-language: Haskell2010
       default-extensions: LambdaCase, OverloadedStrings, QuasiQuotes
-    |]
+|]
 
 stackYaml :: Inputs -> ByteString
 stackYaml inputs = encodeUtf8
@@ -107,13 +110,19 @@ compiler: ${compilerVersion inputs}
 
 packages:
 - .
-    |]
+|]
 
 readme :: Inputs -> ByteString
 readme inputs = encodeUtf8
     [heredoc|# ${projectName inputs}
 ${projectDescription inputs}
-    |]
+|]
+
+changelog :: Inputs -> ByteString
+changelog inputs = encodeUtf8
+    [heredoc|# ${projectVersion inputs}
+Initial release.
+|]
 
 license :: Inputs -> ByteString
 license inputs = encodeUtf8
@@ -138,4 +147,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-    |]
+|]

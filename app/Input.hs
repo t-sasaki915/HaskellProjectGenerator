@@ -22,6 +22,7 @@ data Inputs = Inputs
     , projectCopyright   :: Text
     , stackResolver      :: Text
     , compilerVersion    :: Text
+    , needChangelog      :: Bool
     , needExecutable     :: Bool
     , needLibrary        :: Bool
     , needTestSuite      :: Bool
@@ -46,6 +47,7 @@ askInputs = runAsk defaultBehaviour $ do
     projectCopyright'   <- askOrElse "Project copyright?"   (Text.show currentYear <> " " <> projectAuthor')
     stackResolver'      <- askOrElse "Stack resolver?"      "nightly-2025-05-28"
     compilerVersion'    <- askOrElse "Compiler version?"    "ghc-9.12.2"
+    needChangelog'      <- askOrElse "Need Changelog?"      False
     needExecutable'     <- askOrElse "Need executable?"     True
     needLibrary'        <- askOrElse "Need library?"        True
     needTestSuite'      <- askOrElse "Need test suite?"     True
@@ -64,6 +66,7 @@ askInputs = runAsk defaultBehaviour $ do
         , projectCopyright   = projectCopyright'
         , stackResolver      = stackResolver'
         , compilerVersion    = compilerVersion'
+        , needChangelog      = needChangelog'
         , needExecutable     = needExecutable'
         , needLibrary        = needLibrary'
         , needTestSuite      = needTestSuite'
